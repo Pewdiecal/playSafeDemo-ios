@@ -34,7 +34,7 @@ struct HomeView: View {
                                     Button {
                                         mediaContents = mediaContent
                                     } label: {
-                                        MediaCatalogueCellView(imageUrl: "http://192.168.1.214:8000\(mediaContent.contentCovertArtUrl!)",
+                                        MediaCatalogueCellView(imageUrl: NetworkRequestService.baseUrl!.appendingPathComponent(mediaContent.contentCovertArtUrl!),
                                                                title: mediaContent.contentName!, genre: mediaContent.genre!.rawValue)
                                     }
                                     .buttonStyle(PlainButtonStyle())
@@ -70,7 +70,7 @@ struct HomeView: View {
         .fullScreenCover(item: $mediaContents) {
           // On Dismiss Closure
         } content: { item in
-            makeFullScreenVideoPlayer(for: "http://192.168.1.214:8000\(item.masterPlaylistURL!)")
+            makeFullScreenVideoPlayer(for: NetworkRequestService.baseUrl!.appendingPathComponent(item.masterPlaylistURL!))
         }
         .overlay(ProgressView("Logging out ...")
             .padding()
@@ -81,8 +81,8 @@ struct HomeView: View {
     }
 
     @ViewBuilder
-    private func makeFullScreenVideoPlayer(for videoUrl: String) -> some View {
-        let videoAsset = AVURLAsset(url: URL(string: videoUrl)!)
+    private func makeFullScreenVideoPlayer(for videoUrl: URL) -> some View {
+        let videoAsset = AVURLAsset(url: videoUrl)
         let playerItem = AVPlayerItem(asset: videoAsset)
         let avPlayer = AVPlayer(playerItem: playerItem)
         VideoPlayer(player: avPlayer)

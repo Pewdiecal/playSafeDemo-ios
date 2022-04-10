@@ -26,7 +26,6 @@
 		E8A4C41227DD236E00469867 /* RequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41127DD236E00469867 /* RequestBody.swift */; };
 		E8A4C41527DD276900469867 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41427DD276900469867 /* Logging.swift */; };
 		E8A4C41727DDD85D00469867 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41627DDD85D00469867 /* HomeViewModel.swift */; };
-		E8A4C41E27DE351800469867 /* LoopPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41D27DE351800469867 /* LoopPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,7 +49,6 @@
 		E8A4C41127DD236E00469867 /* RequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBody.swift; sourceTree = "<group>"; };
 		E8A4C41427DD276900469867 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
 		E8A4C41627DDD85D00469867 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
-		E8A4C41D27DE351800469867 /* LoopPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +85,7 @@
 				E8A4C40027DCC3A100469867 /* Services */,
 				E8A4C3FB27DCC0EB00469867 /* Models */,
 				E8A4C3FA27DCC0D400469867 /* Views */,
-				E8A4C40B27DD023D00469867 /* ReusableView */,
+				E8A4C40B27DD023D00469867 /* ReusableViews */,
 				E8A4C3E627DB571200469867 /* PlaySafeDemoApp.swift */,
 				E8A4C3EA27DB571300469867 /* Assets.xcassets */,
 				E8A4C3EC27DB571300469867 /* Preview Content */,
@@ -153,13 +151,12 @@
 			path = RegisterAccount;
 			sourceTree = "<group>";
 		};
-		E8A4C40B27DD023D00469867 /* ReusableView */ = {
+		E8A4C40B27DD023D00469867 /* ReusableViews */ = {
 			isa = PBXGroup;
 			children = (
 				E8A4C3F827DC9F7900469867 /* MediaCatalogueCellView.swift */,
-				E8A4C41D27DE351800469867 /* LoopPlayerView.swift */,
 			);
-			path = ReusableView;
+			path = ReusableViews;
 			sourceTree = "<group>";
 		};
 		E8A4C40C27DD150E00469867 /* Home */ = {
@@ -262,7 +259,6 @@
 				E8A4C40227DCC4E200469867 /* NetworkRequestService.swift in Sources */,
 				E811282B2802DD9E002D18F8 /* ErrorMessage.swift in Sources */,
 				E8A4C40627DCED8500469867 /* NetworkRequestErrors.swift in Sources */,
-				E8A4C41E27DE351800469867 /* LoopPlayerView.swift in Sources */,
 				E8A4C40E27DD152700469867 /* HomeView.swift in Sources */,
 				E8A4C3F927DC9F7900469867 /* MediaCatalogueCellView.swift in Sources */,
 				E8A4C3E727DB571200469867 /* PlaySafeDemoApp.swift in Sources */,

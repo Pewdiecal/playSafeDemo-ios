@@ -1,13 +1,13 @@
 import SwiftUI
 
 struct MediaCatalogueCellView: View {
-    var imageUrl: String
+    var imageUrl: URL
     var title: String
     var genre: String
 
     var body: some View {
         VStack {
-            AsyncImage(url: URL(string: imageUrl)) { image in
+            AsyncImage(url: imageUrl) { image in
                 image
                     .resizable()
                     .frame(width: 200, height: 200)
