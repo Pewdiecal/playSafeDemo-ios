@@ -35,7 +35,7 @@ class NetworkRequestService {
         request.setValue("Accept-Encoding", forHTTPHeaderField: "gzip")
 
         if let accessToken = authService?.accessToken {
-            request.setValue("Bearer \(accessToken)", forHTTPHeaderField: "Authorization")
+            request.setValue("Bearer \(accessToken.accessToken)", forHTTPHeaderField: "Authorization")
         }
 
         request.httpBody = requestBody
@@ -46,7 +46,7 @@ class NetworkRequestService {
     private func sendRequest(_ request: URLRequest) -> AnyPublisher<(Data, Int), Error> {
         return urlSession.dataTaskPublisher(for: request)
             .mapError { _ in
-                return NetworkRequestError.requestToServerFailed
+                return NetworkRequestError.requestToServerFailed(reason: "Request to server failed")
             }
             .tryMap { data, response in
                 guard let httpURLResponse = response as? HTTPURLResponse,
@@ -64,7 +64,7 @@ class NetworkRequestService {
         data: Data?,
         response: URLResponse?
     ) -> NetworkRequestError {
-        var error = NetworkRequestError.badRequest
+        var error = NetworkRequestError.badRequest(reason: decodeErrorMessage(data: data))
 
         if let response = response as? HTTPURLResponse {
             switch response.statusCode {
@@ -72,17 +72,14 @@ class NetworkRequestService {
                 guard let data = data else {
                     break
                 }
-
                 print("Network request missing required field error (Data): \(String(decoding: data, as: UTF8.self))")
-
-                error = .missingRequiredField
-
+                error = NetworkRequestError.missingRequiredField(reason: String(decoding: data, as: UTF8.self))
             case 401:
-                error = NetworkRequestError.unauthorized
-
+                error = NetworkRequestError.unauthorized(reason: decodeErrorMessage(data: data))
             case 404:
-                error = NetworkRequestError.notFound
-
+                error = NetworkRequestError.notFound(reason: decodeErrorMessage(data: data))
+            case 500:
+                error = NetworkRequestError.internalServerError(reason: decodeErrorMessage(data: nil))
             default:
                 break
             }
@@ -92,8 +89,8 @@ class NetworkRequestService {
     }
 
     private let urlSession = URLSession.shared
-    private var authService: AuthService?
-    static let baseUrl = URL(string: "http://localhost:8000")
+    var authService: AuthService?
+    static let baseUrl = URL(string: "http://192.168.1.214:8000")
 }
 
 extension URLRequest {

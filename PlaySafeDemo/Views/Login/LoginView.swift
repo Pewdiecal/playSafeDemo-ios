@@ -1,10 +1,11 @@
 import SwiftUI
 
 struct LoginView: View {
+    @StateObject private var loginViewModel = LoginViewModel()
     @State private var username = ""
     @State private var password = ""
-    @State private var isCredentialValid = false
-    @StateObject private var loginViewModel = LoginViewModel()
+    @State private var navigateToRegisterAccount = false
+    @State private var isLoading = false
 
     var body: some View {
         NavigationView {
@@ -21,24 +22,35 @@ struct LoginView: View {
                         SecureField("Password", text: $password)
                         Button("Login") {
                             loginViewModel.login(username: username, password: password)
-                            isCredentialValid = loginViewModel.networkRequestService != nil
+                            isLoading = true
                         }
 
-                        Button("Register Account") {
-
+                        Button("Register Acccount") {
+                            navigateToRegisterAccount = true
                         }
                     }
 
                     Spacer()
-                    NavigationLink("", destination: HomeView(), isActive: $isCredentialValid)
+                NavigationLink("", destination: RegisterAcccountView(), isActive: $navigateToRegisterAccount)
+                NavigationLink("", destination: HomeView(networkRequestService: loginViewModel.networkRequestService ?? NetworkRequestService()),
+                               isActive: $loginViewModel.isCredentialValid)
+                    .isDetailLink(false)
             }
             .navigationTitle("Login")
         }
-    }
-}
-
-struct LoginView_Previews: PreviewProvider {
-    static var previews: some View {
-        LoginView()
+        .onReceive(loginViewModel.$isSuccess) { isSuccess in
+            isLoading = false
+        }
+        .alert(loginViewModel.errorMessage ?? "", isPresented: $loginViewModel.showingAlert) {
+            Button("OK", role: .cancel) {
+                isLoading = false
+            }
+        }
+        .overlay(ProgressView("Logging In ...")
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 10)
+            .opacity(isLoading ? 1 : 0))
     }
 }

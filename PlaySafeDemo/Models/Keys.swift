@@ -1,6 +1,6 @@
 import Foundation
 
-enum CountryCode: Codable {
+enum CountryCode: String, Codable {
     case MY
     case KR
     case JP
@@ -17,4 +17,19 @@ enum StreamingResolution: String, Codable {
     case SD_360 = "360p"
     case SD_240 = "240p"
     case SD_144 = "144p"
+}
+
+enum SubscribtionStatus: String, Codable {
+    case active = "Active"
+    case inactive = "Inactive"
+    case trial = "Trial"
+}
+
+enum Genre: String, Codable, CaseIterable {
+    case comedy
+    case kpop
+    case horror
+    case relaxing
+    case sci_fi
+    case drama
 }

@@ -40,11 +40,3 @@ struct MediaCatalogueCellView: View {
         .shadow(radius: 5)
     }
 }
-
-struct MediaCatalogueCellView_Previews: PreviewProvider {
-    static var previews: some View {
-        MediaCatalogueCellView(imageUrl: "https://htmlcolorcodes.com/assets/images/colors/blood-red-color-solid-background-1920x1080.png",
-                               title: "Dummy",
-                               genre: "DummyGenre")
-    }
-}

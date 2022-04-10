@@ -5,8 +5,10 @@ struct RegisterAcccountView: View {
     @State private var username = ""
     @State private var newPassword = ""
     @State private var confirmPassword = ""
-    @State private var countryCode: CountryCode? = .none
+    @State private var countryCode: CountryCode = .MY
+    @State private var isLoading = false
     @StateObject private var viewModel = RegisterAccountViewModel()
+    @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     
     var body: some View {
         VStack {
@@ -20,7 +22,7 @@ struct RegisterAcccountView: View {
             Form {
                 TextField("Email", text: $email)
 
-                TextField("Username", text: $email)
+                TextField("Username", text: $username)
 
                 SecureField("New Password", text: $newPassword)
 
@@ -37,22 +39,34 @@ struct RegisterAcccountView: View {
                 }
 
                 Button("Confirm") {
-
-                }
-
-                Button("Back") {
-
+                    viewModel.registerAccount(email: email,
+                                              username: username,
+                                              password: newPassword,
+                                              confirmPassword: confirmPassword,
+                                              countryCode: countryCode)
+                    isLoading = true
                 }
             }
 
             Spacer()
         }
         .navigationTitle("Register Account")
-    }
-}
-
-struct RegisterAcccountView_Previews: PreviewProvider {
-    static var previews: some View {
-        RegisterAcccountView()
+        .onReceive(viewModel.$isSuccess) { isSuccess in
+            if isSuccess {
+                self.presentationMode.wrappedValue.dismiss()
+            }
+            isLoading = false
+        }
+        .alert(viewModel.errorMessage ?? "", isPresented: $viewModel.showingAlert) {
+            Button("OK", role: .cancel) {
+                isLoading = false
+            }
+        }
+        .overlay(ProgressView("Registering account ...")
+            .padding()
+            .background(Color.white)
+            .cornerRadius(10)
+            .shadow(radius: 10)
+            .opacity(isLoading ? 1 : 0))
     }
 }

@@ -6,6 +6,7 @@ struct RegisterAccountDetailsRequestBody: Codable {
     var password: String
     var registeredRegion: CountryCode
     var maxStreamingQuality: StreamingResolution
+    var isContentProvider: Bool = false
 }
 
 struct LoginRequestBody: Codable {

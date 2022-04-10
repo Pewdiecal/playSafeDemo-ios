@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E811282B2802DD9E002D18F8 /* ErrorMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = E811282A2802DD9E002D18F8 /* ErrorMessage.swift */; };
 		E8A4C3E727DB571200469867 /* PlaySafeDemoApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C3E627DB571200469867 /* PlaySafeDemoApp.swift */; };
 		E8A4C3E927DB571200469867 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C3E827DB571200469867 /* LoginView.swift */; };
 		E8A4C3EB27DB571300469867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E8A4C3EA27DB571300469867 /* Assets.xcassets */; };
@@ -24,9 +25,12 @@
 		E8A4C41027DD200200469867 /* RegisterAccountViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C40F27DD200200469867 /* RegisterAccountViewModel.swift */; };
 		E8A4C41227DD236E00469867 /* RequestBody.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41127DD236E00469867 /* RequestBody.swift */; };
 		E8A4C41527DD276900469867 /* Logging.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41427DD276900469867 /* Logging.swift */; };
+		E8A4C41727DDD85D00469867 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41627DDD85D00469867 /* HomeViewModel.swift */; };
+		E8A4C41E27DE351800469867 /* LoopPlayerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E8A4C41D27DE351800469867 /* LoopPlayerView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E811282A2802DD9E002D18F8 /* ErrorMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMessage.swift; sourceTree = "<group>"; };
 		E8A4C3E327DB571200469867 /* PlaySafeDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PlaySafeDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E8A4C3E627DB571200469867 /* PlaySafeDemoApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaySafeDemoApp.swift; sourceTree = "<group>"; };
 		E8A4C3E827DB571200469867 /* LoginView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginView.swift; sourceTree = "<group>"; };
@@ -45,6 +49,8 @@
 		E8A4C40F27DD200200469867 /* RegisterAccountViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegisterAccountViewModel.swift; sourceTree = "<group>"; };
 		E8A4C41127DD236E00469867 /* RequestBody.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RequestBody.swift; sourceTree = "<group>"; };
 		E8A4C41427DD276900469867 /* Logging.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Logging.swift; sourceTree = "<group>"; };
+		E8A4C41627DDD85D00469867 /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
+		E8A4C41D27DE351800469867 /* LoopPlayerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoopPlayerView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +120,7 @@
 				E8A4C3FE27DCC21F00469867 /* MediaContent.swift */,
 				E8A4C3F627DC9CFA00469867 /* Keys.swift */,
 				E8A4C41127DD236E00469867 /* RequestBody.swift */,
+				E811282A2802DD9E002D18F8 /* ErrorMessage.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -150,6 +157,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A4C3F827DC9F7900469867 /* MediaCatalogueCellView.swift */,
+				E8A4C41D27DE351800469867 /* LoopPlayerView.swift */,
 			);
 			path = ReusableView;
 			sourceTree = "<group>";
@@ -158,6 +166,7 @@
 			isa = PBXGroup;
 			children = (
 				E8A4C40D27DD152700469867 /* HomeView.swift */,
+				E8A4C41627DDD85D00469867 /* HomeViewModel.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -243,6 +252,7 @@
 				E8A4C3F527DC94F100469867 /* RegisterAcccountView.swift in Sources */,
 				E8A4C41527DD276900469867 /* Logging.swift in Sources */,
 				E8A4C3F727DC9CFA00469867 /* Keys.swift in Sources */,
+				E8A4C41727DDD85D00469867 /* HomeViewModel.swift in Sources */,
 				E8A4C40927DD020E00469867 /* LoginViewModel.swift in Sources */,
 				E8A4C3FF27DCC21F00469867 /* MediaContent.swift in Sources */,
 				E8A4C40427DCE3E800469867 /* AuthService.swift in Sources */,
@@ -250,7 +260,9 @@
 				E8A4C3FD27DCC10400469867 /* User.swift in Sources */,
 				E8A4C3E927DB571200469867 /* LoginView.swift in Sources */,
 				E8A4C40227DCC4E200469867 /* NetworkRequestService.swift in Sources */,
+				E811282B2802DD9E002D18F8 /* ErrorMessage.swift in Sources */,
 				E8A4C40627DCED8500469867 /* NetworkRequestErrors.swift in Sources */,
+				E8A4C41E27DE351800469867 /* LoopPlayerView.swift in Sources */,
 				E8A4C40E27DD152700469867 /* HomeView.swift in Sources */,
 				E8A4C3F927DC9F7900469867 /* MediaCatalogueCellView.swift in Sources */,
 				E8A4C3E727DB571200469867 /* PlaySafeDemoApp.swift in Sources */,
