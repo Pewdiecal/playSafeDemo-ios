@@ -6,6 +6,7 @@ struct RegisterAcccountView: View {
     @State private var newPassword = ""
     @State private var confirmPassword = ""
     @State private var countryCode: CountryCode = .MY
+    @State private var subscriptionType: SubscribtionType = .basic
     @State private var isLoading = false
     @StateObject private var viewModel = RegisterAccountViewModel()
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
@@ -38,12 +39,21 @@ struct RegisterAcccountView: View {
                     Text("Hong Kong").tag(CountryCode.HK)
                 }
 
+                Picker(selection: $subscriptionType, label: Text("Select your subscription package")) {
+                    Text("Premium").tag(SubscribtionType.premium)
+                    Text("Standard").tag(SubscribtionType.standard)
+                    Text("Basic").tag(SubscribtionType.basic)
+                    Text("Budget").tag(SubscribtionType.budget)
+                    Text("Premium Trial").tag(SubscribtionType.premiumTrial)
+                }
+
                 Button("Confirm") {
                     viewModel.registerAccount(email: email,
                                               username: username,
                                               password: newPassword,
                                               confirmPassword: confirmPassword,
-                                              countryCode: countryCode)
+                                              countryCode: countryCode,
+                                              subscriptionType: subscriptionType)
                     isLoading = true
                 }
             }

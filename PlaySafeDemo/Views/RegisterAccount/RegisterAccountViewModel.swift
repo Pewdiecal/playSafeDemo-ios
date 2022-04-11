@@ -10,12 +10,13 @@ class RegisterAccountViewModel: ObservableObject {
                          username: String,
                          password: String,
                          confirmPassword: String,
-                         countryCode: CountryCode) {
+                         countryCode: CountryCode,
+                         subscriptionType: SubscribtionType) {
         let requestBody = RegisterAccountDetailsRequestBody(email: email,
                                                             username: username,
                                                             password: password,
                                                             registeredRegion: countryCode,
-                                                            maxStreamingQuality: .fullHD_1080)
+                                                            subscriptionType: subscriptionType)
 
         do {
             let data = try JSONEncoder().encode(requestBody)

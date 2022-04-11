@@ -19,10 +19,12 @@ enum StreamingResolution: String, Codable {
     case SD_144 = "144p"
 }
 
-enum SubscribtionStatus: String, Codable {
-    case active = "Active"
-    case inactive = "Inactive"
-    case trial = "Trial"
+enum SubscribtionType: String, Codable {
+    case premium = "premium"
+    case standard = "standard"
+    case basic = "basic"
+    case budget = "budget"
+    case premiumTrial = "premiumTrial"
 }
 
 enum Genre: String, Codable, CaseIterable {

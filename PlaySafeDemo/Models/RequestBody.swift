@@ -5,7 +5,7 @@ struct RegisterAccountDetailsRequestBody: Codable {
     var username: String
     var password: String
     var registeredRegion: CountryCode
-    var maxStreamingQuality: StreamingResolution
+    var subscriptionType: SubscribtionType
     var isContentProvider: Bool = false
 }
 

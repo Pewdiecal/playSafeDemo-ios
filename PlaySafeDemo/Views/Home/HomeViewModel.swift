@@ -64,6 +64,35 @@ class HomeViewModel: ObservableObject {
             .store(in: &cancelleble)
     }
 
+    func fetchMasterPlaylistUrl(contentId: Int) {
+        networkRequestService.apiRequest(.get, "/api/media/getMasterPlaylistUrl/\(contentId)")
+            .receive(on: DispatchQueue.main)
+            .map { (data, Int) in
+                return data
+            }
+            .sink { completion in
+                switch completion {
+                case .failure(let error):
+                    trace("getMasterPlaylistUr API request error: \(error.localizedDescription)")
+                case .finished:
+                    break
+                }
+            } receiveValue: { [weak self] data in
+                guard let strongSelf = self, let subscriptionType = strongSelf.authService.user?.subscribtionStatus else {
+                    return
+                }
+
+                if let json = try? JSONSerialization.jsonObject(with: data, options: []) as? [String: Any] {
+                    if let maxQuality = json["max_quality_\(subscriptionType)"] as? String {
+                        if let url = json["master_playlist_url_\(maxQuality)"] as? String {
+                            strongSelf.masterPlaylistUrl = MasterPlaylistMetadata(maxQuality: maxQuality, masterPlaylistUrl: url)
+                        }
+                    }
+                }
+            }
+            .store(in: &cancelleble)
+    }
+
     func logout() {
         networkRequestService.apiRequest(.post, "/api/auth/logout", requestBody: nil, queryItems: nil)
             .receive(on: DispatchQueue.main)
@@ -112,4 +141,5 @@ class HomeViewModel: ObservableObject {
     @Published var dramaContent: [MediaContent] = []
     @Published var showingAlert = false
     @Published var logoutSuccess = false
+    @Published var masterPlaylistUrl: MasterPlaylistMetadata?
 }

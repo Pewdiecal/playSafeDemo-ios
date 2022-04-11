@@ -8,6 +8,7 @@ struct HomeView: View {
     @State var mediaContents: MediaContent?
     @Environment(\.presentationMode) var presentationMode: Binding<PresentationMode>
     @State private var isLoading = false
+    @State private var progressText = ""
 
     init(networkRequestService: NetworkRequestService) {
         self.networkRequestService = networkRequestService
@@ -32,7 +33,9 @@ struct HomeView: View {
                                       spacing: 10) {
                                 ForEach(homeViewModel.getContentBasedOnGenre(genre: genre), id: \.self) { mediaContent in
                                     Button {
-                                        mediaContents = mediaContent
+                                        progressText = "Loading Content..."
+                                        isLoading = true
+                                        homeViewModel.fetchMasterPlaylistUrl(contentId: mediaContent.contentId!)
                                     } label: {
                                         MediaCatalogueCellView(imageUrl: NetworkRequestService.baseUrl!.appendingPathComponent(mediaContent.contentCovertArtUrl!),
                                                                title: mediaContent.contentName!, genre: mediaContent.genre!.rawValue)
@@ -58,21 +61,27 @@ struct HomeView: View {
             }
             isLoading = false
         }
+        .onReceive(homeViewModel.$masterPlaylistUrl, perform: { masterPlaylist in
+            if masterPlaylist != nil {
+                isLoading = false
+            }
+        })
         .onAppear(perform: homeViewModel.fetchAllMediaContent)
         .navigationBarBackButtonHidden(true)
         .navigationTitle("Home")
         .toolbar {
             Button("Logout") {
+                progressText = "Logging out..."
                 isLoading = true
                 homeViewModel.logout()
             }
         }
-        .fullScreenCover(item: $mediaContents) {
+        .fullScreenCover(item: $homeViewModel.masterPlaylistUrl) {
           // On Dismiss Closure
         } content: { item in
-            makeFullScreenVideoPlayer(for: NetworkRequestService.baseUrl!.appendingPathComponent(item.masterPlaylistURL!))
+            makeFullScreenVideoPlayer(for: NetworkRequestService.baseUrl!.appendingPathComponent(item.masterPlaylistUrl!))
         }
-        .overlay(ProgressView("Logging out ...")
+        .overlay(ProgressView(progressText)
             .padding()
             .background(Color.white)
             .cornerRadius(10)
