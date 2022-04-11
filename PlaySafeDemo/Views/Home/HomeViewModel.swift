@@ -130,7 +130,7 @@ class HomeViewModel: ObservableObject {
     }
 
     private let networkRequestService: NetworkRequestService
-    private let authService: AuthService
+    let authService: AuthService
     private var cancelleble: Set<AnyCancellable> = Set()
     @Published var errorMessage: String?
     @Published var comedyContent: [MediaContent] = []

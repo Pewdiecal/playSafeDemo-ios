@@ -91,7 +91,8 @@ struct HomeView: View {
 
     @ViewBuilder
     private func makeFullScreenVideoPlayer(for videoUrl: URL) -> some View {
-        let videoAsset = AVURLAsset(url: videoUrl)
+        let headers = ["Authorization": "Bearer \(homeViewModel.authService.accessToken!.accessToken)"]
+        let videoAsset = AVURLAsset(url: videoUrl, options: ["AVURLAssetHTTPHeaderFieldsKey": headers])
         let playerItem = AVPlayerItem(asset: videoAsset)
         let avPlayer = AVPlayer(playerItem: playerItem)
         VideoPlayer(player: avPlayer)
